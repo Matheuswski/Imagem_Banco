@@ -19,12 +19,12 @@ if(!$resultado) {
 </head>
 <body>
     <h2>Selecione um Novo Arquivo de Imagem</h2>
-    <form enctype="multipart/form-data" method="POST" action="upload.php">
-        <input type="hidden" name="MAX_FILE_SIZE" value="9999999999" >
-        <input type="text" name="evento" placeholder="Nome do Evento">
-        <input type="text" name="descricao" placeholder="Descricção">
-        <input type="file" name="imagem" >
-        <input type="submit" name="Salvar" >
+    <form enctype="multipart/form-data" action="upload.php" method="POST">
+        <input type="hidden" name="MAX_FILE_SIZE" value="999999999" >
+        <input name="evento" type="text" placeholder="Nome do Evento">
+        <input name="descricao" type="text"  placeholder="Descricção">
+        <input name="imagem" type="file"  >
+        <input name="Salvar" type="submit"  >
         </form>
         <br>
         <table border = "1">
