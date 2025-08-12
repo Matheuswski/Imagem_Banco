@@ -1,7 +1,7 @@
 <?php
 //CONFIGURAÇÃO DO BANCO DE DADOS
 $host="localhost";
-$dbname="armazena_imagens";
+$dbname="armazena_imagem";
 $username="root";
 $password="";   
 
@@ -14,7 +14,7 @@ try {
         $id = $_GET["id"];
 
         // Recupera os dados dos funcionários
-     $sql = 'SELECT nome, telefone, tipo_foto, foto FROM funcionarios WHERE id = :id';
+     $sql = 'SELECT nome, telefone, tipo_foto, foto FROM funcionario WHERE id = :id';
      $stmt = $pdo->prepare($sql);
      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
      $stmt->execute();
@@ -43,12 +43,23 @@ try {
     <body>
         <h1>Dados dos Funcionarios</h1>
         <p>Nome:<?=htmlspecialchars($funcionario['nome'])?></p>
+        <p>Telefone:<?=htmlspecialchars($funcionario['telefone'])?></p>
+        <p>Foto:</p>
+        <img src="data:<?= $funcionario['tipo_foto'] ?>;base64,<?= base64_encode($funcionario['foto']) ?>" alt="Foto do Funcionário">
+        <form method="post">
+            <input type="hidden" name="excluir_id" value="<?= $id ?>">
+            <button type="submit">Excluir Funcionário</button>
+        </form>
     </body>
     </html>
-     } else {
-         echo "Funcionário não encontrado.";
-         exit();
-     }
-    }
+    <?php
+        } else {
+            echo "Funcionário não encontrado.";
+        }
+    }else {
+        echo "ID do funcionario não foi fornecido.";
+    }   
+}catch(PDOException $e) {
+    echo "Erro: " . $e->getMessage();
 }
 ?>
